@@ -3,6 +3,16 @@ interface Project {
     name: string;
     description: string;
   }
+  interface ProjectHistory {
+    id: number;
+    name: string;
+    description: string;
+    priority: 'low' | 'medium' | 'high';
+    projectId: number;
+    creationDate: Date;
+    status: 'todo' | 'doing' | 'done';  
+    ownerId: number;
+  }
   
   class ProjectService {
     private projects: Project[];
@@ -41,26 +51,39 @@ interface Project {
     private saveProjectsToStorage(): void {
       localStorage.setItem('projects', JSON.stringify(this.projects));
     }
+
+    setActiveProject(projectId: number): void {
+      const project = this.projects.find(p => p.id === projectId);
+      if (project) {
+        localStorage.setItem('activeProject', JSON.stringify(project));
+      } else {
+        console.error('Project not found');
+      }
+    }
+  
+    getActiveProject(): Project | null {
+      const activeProjectJSON = localStorage.getItem('activeProject');
+      return activeProjectJSON ? JSON.parse(activeProjectJSON) : null;
+    }
   }
   
-  // Przykładowe użycie
+ 
   const projectService = new ProjectService();
   
-  // Dodanie projektu
+  
   const newProject: Project = { id: 1, name: 'Project 1', description: 'Description of Project 1' };
   projectService.addProject(newProject);
-  
-  // Pobranie wszystkich projektów
+
   const allProjects = projectService.getAllProjects();
   console.log(allProjects);
   
-  // Edycja projektu
+
   const projectToUpdate = projectService.getProjectById(1);
   if (projectToUpdate) {
     projectToUpdate.name = 'Updated Project 1';
     projectService.updateProject(projectToUpdate);
   }
   
-  // Usunięcie projektu
+ 
   projectService.deleteProject(1);
   
