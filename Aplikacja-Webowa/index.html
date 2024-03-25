@@ -1,13 +1,42 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>History</title>
+</head>
+
+<body>
+  <section class="form-section">
+    <div class="form-container">
+      <h2>Add new project</h2>
+      <form id="project-form">
+        <div class="input-group">
+          <label for="project-name">Name Project:</label>
+          <input type="text" id="project-name" placeholder="Wpisz nazwę projektu" required>
+        </div>
+        <div class="input-group">
+          <label for="project-description">Describe Project:</label>
+          <textarea id="project-description" placeholder="Opisz projekt" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Add Project</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="projects-section">
+    <div class="projects-container">
+      <h2>Main Project</h2>
+      <div id="projects-list">
+        <!-- Lista projektów będzie tutaj -->
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>
